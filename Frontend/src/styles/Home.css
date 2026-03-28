@@ -1,0 +1,228 @@
+.desk-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+}
+
+.notebook {
+  position: relative;
+  display: flex;
+  width: 100%;
+  max-width: 900px;
+  min-height: 700px;
+  background: var(--sepia-dark); /* Notebook Cover Color Behind the Pages */
+  border-radius: 8px 12px 12px 8px;
+  box-shadow: 
+    -5px 0 10px rgba(0,0,0,0.1),
+    15px 15px 30px rgba(0,0,0,0.2), 
+    inset -3px 0 5px rgba(255,255,255,0.2);
+  padding: 8px 15px 8px 45px; /* Offset for spiral binding */
+  margin: 0 auto;
+}
+
+/* Notebook Cover Texture/Lines overlay */
+.notebook::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: inherit;
+  background: url("data:image/svg+xml,%3Csvg width='4' height='4' viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 3h1v1H1V3zm2-2h1v1H3V1z' fill='%239a8c78' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* Spiral Binding */
+.spiral-binding {
+  position: absolute;
+  left: 10px;
+  top: 20px;
+  bottom: 20px;
+  width: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  z-index: 10;
+}
+
+.spiral-ring {
+  width: 35px;
+  height: 12px;
+  background: linear-gradient(to bottom, #f0f0f0 0%, #b0b0b0 50%, #888 100%);
+  border-radius: 6px;
+  box-shadow: 1px 2px 3px rgba(0,0,0,0.4);
+  position: relative;
+  transform: rotate(-5deg);
+}
+
+.spiral-ring::before, .spiral-ring::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #333;
+  border-radius: 50%;
+  top: 2px;
+}
+
+.spiral-ring::before { left: -4px; box-shadow: inset 1px 1px 2px rgba(0,0,0,0.8); }
+.spiral-ring::after { right: -4px; box-shadow: inset -1px 1px 2px rgba(0,0,0,0.8); }
+
+/* The actual paper pages */
+.notebook-page {
+  flex: 1;
+  background: var(--bg-paper);
+  border-radius: 4px 8px 8px 4px;
+  border: 1px solid var(--sepia);
+  border-left: 2px solid rgba(0,0,0,0.1);
+  box-shadow: 
+    inset 0 0 20px rgba(0,0,0,0.02),
+    -2px 0 5px rgba(0,0,0,0.1);
+  padding: 2.5rem 3rem;
+  position: relative;
+  overflow-y: auto;
+  max-height: 85vh;
+  z-index: 2;
+}
+
+/* Right side page edges illusion */
+.notebook-page::after {
+  content: '';
+  position: absolute;
+  top: 4px; bottom: 4px; right: -4px;
+  width: 4px;
+  background: var(--bg-paper);
+  border-radius: 0 4px 4px 0;
+  border-right: 1px solid var(--sepia);
+  box-shadow: 2px 0 2px rgba(0,0,0,0.05);
+  z-index: -1;
+}
+
+/* Top Right Headers */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-bottom: 2px solid var(--sepia-dark);
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.page-header h1 {
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--ink-blue);
+  transform: rotate(-1deg); /* Slight handwritten tilt */
+}
+
+.header-date {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--ink-faded);
+}
+
+/* Tabs on the side */
+.notebook-tabs {
+  position: absolute;
+  right: -45px;
+  top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  z-index: 1;
+}
+
+.notebook-tabs .tab {
+  background: var(--tab-color);
+  color: var(--ink-primary);
+  border: 1px solid var(--sepia-dark);
+  border-left: none;
+  padding: 15px 10px;
+  border-radius: 0 8px 8px 0;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 3px 3px 5px rgba(0,0,0,0.1);
+  transition: all 0.2s ease;
+  transform-origin: left;
+}
+
+.notebook-tabs .tab:hover {
+  filter: brightness(0.95);
+  padding-right: 15px;
+  right: -50px;
+}
+
+.notebook-tabs .tab.active {
+  background: var(--bg-paper);
+  border-left: 2px solid var(--bg-paper); /* Overlap border */
+  z-index: 3;
+  margin-left: -2px; /* Pull into page */
+  font-weight: 700;
+  color: var(--ink-blue);
+  box-shadow: 4px 4px 6px rgba(0,0,0,0.15);
+}
+
+.notebook-tabs .tab-logout {
+  background: var(--accent-red);
+  color: var(--bg-paper);
+  margin-top: 30px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Forms */
+.create-note-form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2rem;
+}
+
+/* Notes List Styles inside the Page */
+.notes-wall {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.notes-empty {
+  text-align: center;
+  padding: 4rem;
+}
+.notes-empty p {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--ink-faded);
+  transform: rotate(-2deg);
+}
+
+@media (max-width: 768px) {
+  .desk-container { padding: 1rem; }
+  .notebook { min-height: 85vh; padding-right: 5px; }
+  .notebook-tabs {
+    right: 0;
+    top: -45px;
+    flex-direction: row;
+    writing-mode: horizontal-tb;
+    width: 100%;
+    justify-content: center;
+  }
+  .notebook-tabs .tab {
+    padding: 8px 15px;
+    border-radius: 8px 8px 0 0;
+    border: 1px solid var(--sepia-dark);
+    border-bottom: none;
+    font-size: 1.2rem;
+  }
+}

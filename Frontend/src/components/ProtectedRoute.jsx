@@ -1,8 +1,9 @@
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import api from "../api";
 import { REFRESH_TOKEN, ACCESS_TOKEN } from "../constants";
 import { useState, useEffect } from "react";
+import "../styles/LoadingIndicator.css";
 
 function ProtectedRoute({ children }) {
   const [isAuthorized, set_isAuthorized] = useState(null);
@@ -50,7 +51,15 @@ function ProtectedRoute({ children }) {
   };
 
   if (isAuthorized === null) {
-    return <div>Loading...</div>;
+    return (
+      <div className="loading-page">
+        <div className="loading-content">
+          <div className="loading-spinner"></div>
+          <p className="loading-text">Opening your notebook...</p>
+          <p className="loading-subtext">Just a moment</p>
+        </div>
+      </div>
+    );
   }
 
   return isAuthorized ? children : <Navigate to="/login" />;
