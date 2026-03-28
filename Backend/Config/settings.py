@@ -85,6 +85,9 @@ CORS_ALLOWED_ORIGINS = [
     "https://notes-frontend-jordhy-jpgs-projects.vercel.app",
     "http://localhost:5173",
 ]
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^https://.*\.vercel\.app$",
+]
 CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = "Config.urls"
