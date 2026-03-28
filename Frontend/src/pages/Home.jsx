@@ -11,10 +11,6 @@ function Home() {
   const [title, setTitle] = useState("");
   const [activeTab, setActiveTab] = useState("read");
 
-  useEffect(() => {
-    getNotes();
-  }, []);
-
   const getNotes = () => {
     api
       .get("/")
@@ -24,6 +20,10 @@ function Home() {
       })
       .catch((err) => alert(err));
   };
+
+  useEffect(() => {
+    getNotes();
+  }, []);
 
   const deleteNote = (id) => {
     api
@@ -100,7 +100,7 @@ function Home() {
             </div>
           </div>
 
-          <div className="page-content">
+          <div key={activeTab} className="page-content animate-tab-switch">
             {activeTab === "write" && (
               <section className="create-note-section">
                 <form className="create-note-form" onSubmit={createNote}>

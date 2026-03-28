@@ -8,6 +8,8 @@
   transform: rotate(-0.5deg);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   z-index: 10;
+  animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  opacity: 0;
 }
 
 .note-card:nth-child(even) {
@@ -34,6 +36,7 @@
   background-color: rgba(255, 255, 255, 0.4);
   box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   border-radius: 2px;
+  backdrop-filter: blur(2px);
 }
 
 .note-card:nth-child(even) .tape {
@@ -84,7 +87,7 @@
   font-size: 1.4rem;
   color: var(--ink-faded);
   cursor: pointer;
-  transition: color 0.2s ease;
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
   gap: 5px;
@@ -94,6 +97,11 @@
   color: var(--accent-red);
   text-decoration: line-through;
   text-decoration-color: var(--accent-red);
+  transform: scale(1.05) rotate(2deg);
+}
+
+.delete-btn:active {
+  transform: scale(0.95) rotate(-2deg);
 }
 
 .ink-splash {

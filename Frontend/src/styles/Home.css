@@ -20,6 +20,7 @@
     inset -3px 0 5px rgba(255,255,255,0.2);
   padding: 8px 15px 8px 45px; /* Offset for spiral binding */
   margin: 0 auto;
+  animation: slideUpFade 0.7s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 }
 
 /* Notebook Cover Texture/Lines overlay */
@@ -146,14 +147,20 @@
   font-weight: 500;
   cursor: pointer;
   box-shadow: 3px 3px 5px rgba(0,0,0,0.1);
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   transform-origin: left;
+  opacity: 0;
+  animation: fadeIn 0.5s ease forwards;
 }
+
+.notebook-tabs .tab:nth-child(1) { animation-delay: 0.3s; }
+.notebook-tabs .tab:nth-child(2) { animation-delay: 0.4s; }
+.notebook-tabs .tab:nth-child(3) { animation-delay: 0.5s; }
 
 .notebook-tabs .tab:hover {
   filter: brightness(0.95);
-  padding-right: 15px;
-  right: -50px;
+  padding-right: 20px;
+  margin-right: -10px;
 }
 
 .notebook-tabs .tab.active {
@@ -187,6 +194,11 @@
   display: flex;
   justify-content: flex-end;
   margin-top: 2rem;
+}
+
+/* Animation class for tab switching */
+.animate-tab-switch {
+  animation: fadeIn 0.4s ease-out forwards;
 }
 
 /* Notes List Styles inside the Page */

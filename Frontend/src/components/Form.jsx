@@ -6,7 +6,7 @@ import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
 function Form({ route, method }) {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const [loading, setLoading] = useState(false)
+    const [, setLoading] = useState(false)
     const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
