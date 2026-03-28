@@ -11,10 +11,6 @@ function Home() {
   const [title, setTitle] = useState("");
   const [activeTab, setActiveTab] = useState("read");
 
-  useEffect(() => {
-    getNotes();
-  }, []);
-
   const getNotes = () => {
     api
       .get("/")
@@ -24,6 +20,10 @@ function Home() {
       })
       .catch((err) => alert(err));
   };
+
+  useEffect(() => {
+    getNotes();
+  }, []);
 
   const deleteNote = (id) => {
     api

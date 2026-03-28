@@ -8,10 +8,6 @@ import "../styles/LoadingIndicator.css";
 function ProtectedRoute({ children }) {
   const [isAuthorized, set_isAuthorized] = useState(null);
 
-  useEffect(() => {
-    auth().catch(() => set_isAuthorized(false));
-  }, []);
-
   const refreshToken = async () => {
     const refreshToken = localStorage.getItem(REFRESH_TOKEN);
 
@@ -31,24 +27,28 @@ function ProtectedRoute({ children }) {
     }
   };
 
-  const auth = async () => {
-    const token = localStorage.getItem(ACCESS_TOKEN);
+  useEffect(() => {
+    const auth = async () => {
+      const token = localStorage.getItem(ACCESS_TOKEN);
 
-    if (!token) {
-      set_isAuthorized(false);
-      return;
-    }
+      if (!token) {
+        set_isAuthorized(false);
+        return;
+      }
 
-    const decoded = jwtDecode(token);
-    const tokenExpiration = decoded.exp;
-    const now = Date.now() / 1000; //by default in ms, have to divide by 1000 to get seconds
+      const decoded = jwtDecode(token);
+      const tokenExpiration = decoded.exp;
+      const now = Date.now() / 1000; //by default in ms, have to divide by 1000 to get seconds
 
-    if (tokenExpiration < now) {
-      await refreshToken();
-    } else {
-      set_isAuthorized(true);
-    }
-  };
+      if (tokenExpiration < now) {
+        await refreshToken();
+      } else {
+        set_isAuthorized(true);
+      }
+    };
+
+    auth().catch(() => set_isAuthorized(false));
+  }, []);
 
   if (isAuthorized === null) {
     return (
