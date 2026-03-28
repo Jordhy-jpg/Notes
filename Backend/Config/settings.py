@@ -12,9 +12,9 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 import os
 from pathlib import Path
+from urllib.parse import parse_qsl, urlparse
 
 from dotenv import load_dotenv
-from urllib.parse import urlparse, parse_qsl
 
 load_dotenv()
 
@@ -31,7 +31,7 @@ SECRET_KEY = os.environ["SECRETKEY"]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = ["127.0.0.1", "https://notes-backend-api-31nu.onrender.com"]
+ALLOWED_HOSTS = ["127.0.0.1", "notes-backend-api-31nu.onrender.com"]
 
 # Application definition
 
