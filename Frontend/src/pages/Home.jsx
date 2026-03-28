@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../api";
 import Note from "../components/Note";
 import "../styles/Home.css";
 
 function Home() {
+  const navigate = useNavigate();
   const [notes, setNotes] = useState([]);
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
-  const [activeTab, setActiveTab] = useState("read"); 
+  const [activeTab, setActiveTab] = useState("read");
 
   useEffect(() => {
     getNotes();
@@ -28,9 +30,8 @@ function Home() {
       .delete(`/delete/${id}/`)
       .then((res) => {
         if (res.status === 204) {
-             // success without annoying alert for smoother feel
-        }
-        else alert("Failed to delete note");
+          // success without annoying alert for smoother feel
+        } else alert("Failed to delete note");
         getNotes();
       })
       .catch((error) => alert(error));
@@ -42,11 +43,10 @@ function Home() {
       .post("/", { content, title })
       .then((res) => {
         if (res.status === 201) {
-           setContent("");
-           setTitle("");
-           setActiveTab("read");
-        }
-        else alert("Failed to create note");
+          setContent("");
+          setTitle("");
+          setActiveTab("read");
+        } else alert("Failed to create note");
         getNotes();
       })
       .catch((err) => alert(err));
@@ -54,51 +54,54 @@ function Home() {
 
   const handleLogout = () => {
     localStorage.clear();
-    window.location.href = '/login';
+    navigate("/login");
   };
 
   return (
     <div className="desk-container">
       <div className="notebook">
-        
         {/* Notebook Spiral Binding Effect */}
         <div className="spiral-binding">
-           {[...Array(12)].map((_, i) => (
-             <div className="spiral-ring" key={i}></div>
-           ))}
+          {[...Array(12)].map((_, i) => (
+            <div className="spiral-ring" key={i}></div>
+          ))}
         </div>
 
         {/* Notebook Tabs */}
         <div className="notebook-tabs">
-          <button 
-            className={`tab ${activeTab === 'read' ? 'active' : ''}`}
-            onClick={() => setActiveTab('read')}
+          <button
+            className={`tab ${activeTab === "read" ? "active" : ""}`}
+            onClick={() => setActiveTab("read")}
           >
             My Entries
           </button>
-          <button 
-            className={`tab ${activeTab === 'write' ? 'active' : ''}`}
-            onClick={() => setActiveTab('write')}
+          <button
+            className={`tab ${activeTab === "write" ? "active" : ""}`}
+            onClick={() => setActiveTab("write")}
           >
             New Entry
           </button>
           <button className="tab tab-logout" onClick={handleLogout}>
-            Close
+            Logout
           </button>
         </div>
 
         {/* Notebook Pages Area */}
         <div className="notebook-page paper-texture">
-          
           <div className="page-header">
-             <h1>{activeTab === 'read' ? 'My Thoughts' : 'Journal Entry'}</h1>
-             <div className="header-date">
-                {new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
-             </div>
+            <h1>{activeTab === "read" ? "My Thoughts" : "Journal Entry"}</h1>
+            <div className="header-date">
+              {new Date().toLocaleDateString("en-US", {
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </div>
           </div>
 
           <div className="page-content">
-            {activeTab === 'write' && (
+            {activeTab === "write" && (
               <section className="create-note-section">
                 <form className="create-note-form" onSubmit={createNote}>
                   <div className="form-group">
@@ -127,13 +130,15 @@ function Home() {
                     ></textarea>
                   </div>
                   <div className="form-actions">
-                    <button type="submit" className="btn btn-primary">Save Entry</button>
+                    <button type="submit" className="btn btn-primary">
+                      Save Entry
+                    </button>
                   </div>
                 </form>
               </section>
             )}
 
-            {activeTab === 'read' && (
+            {activeTab === "read" && (
               <section className="notes-section">
                 <div className="notes-wall">
                   {notes.length === 0 ? (
@@ -149,7 +154,6 @@ function Home() {
               </section>
             )}
           </div>
-          
         </div>
       </div>
     </div>
