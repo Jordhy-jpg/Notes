@@ -31,7 +31,7 @@ SECRET_KEY = os.environ["SECRETKEY"]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = ["127.0.0.1", ".onrender.com", "*"]
+ALLOWED_HOSTS = ["127.0.0.1", "https://notes-backend-api-31nu.onrender.com"]
 
 # Application definition
 
@@ -79,8 +79,11 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
 
-CORS_ALLOW_ALL_ORIGINS = True
-# CORS_ALLOWED_ORIGINS = []
+# CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    "https://notes-frontend-three-eta.vercel.app",
+    "https://notes-frontend-jordhy-jpgs-projects.vercel.app",
+]
 CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = "Config.urls"
@@ -110,14 +113,14 @@ WSGI_APPLICATION = "Config.wsgi.application"
 tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': tmpPostgres.path.replace('/', ''),
-        'USER': tmpPostgres.username,
-        'PASSWORD': tmpPostgres.password,
-        'HOST': tmpPostgres.hostname,
-        'PORT': 5432,
-        'OPTIONS': dict(parse_qsl(tmpPostgres.query)),
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": tmpPostgres.path.replace("/", ""),
+        "USER": tmpPostgres.username,
+        "PASSWORD": tmpPostgres.password,
+        "HOST": tmpPostgres.hostname,
+        "PORT": 5432,
+        "OPTIONS": dict(parse_qsl(tmpPostgres.query)),
     }
 }
 
