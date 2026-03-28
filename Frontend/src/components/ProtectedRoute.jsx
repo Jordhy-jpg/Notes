@@ -33,7 +33,7 @@ function ProtectedRoute({ children }) {
         const token = localStorage.getItem(ACCESS_TOKEN)
 
         if (!token) {
-            set_isAuthorized = false
+            set_isAuthorized(false)
             return
         }
 
