@@ -11,9 +11,12 @@ django==6.0.3
     #   notes (pyproject.toml)
     #   dj-database-url
     #   django-cors-headers
+    #   django-filter
     #   djangorestframework
     #   djangorestframework-simplejwt
 django-cors-headers==4.9.0
+    # via notes (pyproject.toml)
+django-filter==25.2
     # via notes (pyproject.toml)
 djangorestframework==3.17.1
     # via
@@ -22,6 +25,8 @@ djangorestframework==3.17.1
 djangorestframework-simplejwt==5.5.1
     # via notes (pyproject.toml)
 gunicorn==25.3.0
+    # via notes (pyproject.toml)
+markdown==3.10.2
     # via notes (pyproject.toml)
 packaging==26.0
     # via gunicorn
