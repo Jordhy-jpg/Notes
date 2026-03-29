@@ -81,14 +81,13 @@ SIMPLE_JWT = {
 
 # CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
-    # "https://notes-frontend-three-eta.vercel.app",
-    # "https://notes-frontend-jordhy-jpgs-projects.vercel.app",
-    ".vercel.app",
+    "https://notes-frontend-three-eta.vercel.app",
+    "https://notes-frontend-jordhy-jpgs-projects.vercel.app",
+    "https://notes-frontend-git-corsregextest-jordhy-jpgs-projects.vercel.app",
+    "https://notes-frontend-5k5zmf11h-jordhy-jpgs-projects.vercel.app",
     "http://localhost:5173",
 ]
-CORS_ALLOWED_ORIGIN_REGEXES = [
-    r"^https:\/\/[^/]+\.vercel\.app$",
-]
+
 CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = "Config.urls"
