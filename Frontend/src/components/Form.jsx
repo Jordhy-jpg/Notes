@@ -38,7 +38,7 @@ function Form({ route, method }) {
         <div className="text-center mb-8">
           <div className="text-6xl mb-4">{name === 'Login' ? '🔐' : '🔑'}</div>
           <h1 className="text-4xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">{name}</h1>
-          <p className="text-gray-500 mt-2">Welcome back! Please {name.toLowerCase()}.signin.</p>
+          <p className="text-gray-500 mt-2">Welcome back! Please {name.toLowerCase()}</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">

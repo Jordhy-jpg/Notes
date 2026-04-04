@@ -24,7 +24,7 @@ class UserSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         return User.objects.create_user(**validated_data)
 
-    # Need to manually create() as create_user() is special since it hashes user password
+    # Need to manually create() using create_user() is special since it hashes user password
 
 
 class NoteSerializer(serializers.ModelSerializer):
