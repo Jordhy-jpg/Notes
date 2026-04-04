@@ -4,10 +4,7 @@ set -o errexit
 
 # Install Python dependencies
 pip install --upgrade pip
-pip install -r Backend/requirements.txt
-
-# Navigate to backend directory
-cd Backend
+pip install -r requirements.txt
 
 # Collect static files
 python manage.py collectstatic --no-input
