@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import api from "../API";
 import Note from "../components/Note";
+import Navbar from "../components/Navbar";
 
 function Home() {
   const [notes, setNotes] = useState([]);
@@ -13,7 +14,6 @@ function Home() {
       .then((res) => res.data)
       .then((data) => {
         setNotes(data);
-        // console.log(data)
       })
       .catch((error) => alert(error));
   };
@@ -49,20 +49,19 @@ function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 flex flex-col items-center justify-center p-8">
-      <div className="w-full max-w-6xl">
-        <div className="mb-12 text-center">
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">
-            Notes
-          </h1>
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
+      <Navbar />
+
+      <main className="max-w-6xl mx-auto px-6 py-8">
+        <div className="text-center mb-10">
           <p className="text-gray-600 text-lg">Capture your thoughts, organize your ideas</p>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-2xl shadow-xl p-6 mb-8">
+            <div className="bg-white rounded-2xl shadow-xl p-6">
               <h2 className="text-2xl font-semibold text-gray-800 mb-6 flex items-center gap-2">
-                <span className="text-3xl">📝</span> Your Notes
+                <span className="text-3xl">📋</span> Your Notes
               </h2>
               
               {notes.length === 0 ? (
@@ -81,14 +80,14 @@ function Home() {
           </div>
 
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-2xl shadow-xl p-6 sticky top-8">
+            <div className="bg-white rounded-2xl shadow-xl p-6 sticky top-24">
               <h2 className="text-2xl font-semibold text-gray-800 mb-6 flex items-center gap-2">
                 <span className="text-3xl">✨</span> Create Note
               </h2>
               
-              <form onSubmit={createNote} className="space-y-4">
+              <form onSubmit={createNote} className="space-y-5">
                 <div>
-                  <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="title" className="block text-sm font-semibold text-gray-700 mb-2">
                     Title
                   </label>
                   <input
@@ -103,7 +102,7 @@ function Home() {
                 </div>
 
                 <div>
-                  <label htmlFor="content" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="content" className="block text-sm font-semibold text-gray-700 mb-2">
                     Content
                   </label>
                   <textarea
@@ -111,7 +110,7 @@ function Home() {
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
                     required
-                    rows={6}
+                    rows={7}
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all text-gray-800 placeholder-gray-400 resize-none"
                     placeholder="Write your thoughts here..."
                   ></textarea>
@@ -121,13 +120,13 @@ function Home() {
                   type="submit" 
                   className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold py-3 px-6 rounded-xl hover:from-indigo-700 hover:to-purple-700 transform hover:scale-105 transition-all shadow-lg hover:shadow-xl"
                 >
-                  Create Note 🚀
+                  Create Note
                 </button>
               </form>
             </div>
           </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 }
