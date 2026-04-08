@@ -14,8 +14,10 @@ function Navbar() {
       try {
         const decoded = jwtDecode(token);
         if (decoded.username) {
-          setUsername(decoded.username);
-          setLoading(false);
+          queueMicrotask(() => {
+            setUsername(decoded.username);
+            setLoading(false);
+          });
           return;
         }
       } catch (error) {
